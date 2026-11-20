@@ -3,20 +3,19 @@
   "tagline": "We hit like a truck.",
   "subline": "Modern Metal aus Leipzig",
   "logo": "https://yt3.googleusercontent.com/WmlIJMH4s2DI4sU5pfPwK8xTrJpig3Y0DQm3TYFIp1LH9LFID8PJZ20zvvWQBUx20yuYqFH3Pw=s600-c-k-c0x00ffffff-no-rj",
-  "heroImage": "https://i.ytimg.com/vi/_cANZMa_zCE/maxresdefault.jpg",
+  "heroImage": "https://yt3.googleusercontent.com/YMLCNMKagXBMim_LvCL8J1KTx3ytKQsGybLHw1BsVdav78mdAVt9VQNSNu-TTW_av2dIZlkc=w2560-k-c0xffffffff-no-nd-rj",
   "latestRelease": {
     "title": "Exitus",
     "text": "Die neue Single – jetzt überall streamen.",
     "spotifyEmbed": "https://open.spotify.com/embed/album/3940WFByQvukqjhQXM7CCx",
     "cover": "https://i.scdn.co/image/ab67616d0000b273d1aa0c1ac34738d0df158c40"
   },
-  "bio": "Gegründet in den Jahren der Pandemie, wurde der Sound von Backmars Village von diesen unruhigen Zeiten geprägt – und wird es bleiben. Explosive Riffs, wilde Vocals, präzise Soli, satte Basslines und thrashendes Drumming: Die Leipziger Metal-Band nimmt dich mit auf einen Ritt durch eine zerfallende, dystopische Klanglandschaft. Seit der Debütsingle „Taste of Fire“ (2022) haben sie Single um Single nachgelegt – zuletzt „Nobody's Wish“ und „Exitus“. Oder wie die Band es selbst sagt: We hit like a truck.",
+  "bio": "Gegründet in den Jahren der Pandemie, wurde der Sound von Backmars Village von diesen unruhigen Zeiten geprägt – und wird es bleiben. Explosive Riffs, wilde Vocals, präzise Soli und thrashendes Drumming: Die Leipziger Metal-Band nimmt dich mit auf einen Ritt durch eine zerfallende, dystopische Klanglandschaft. Seit der Debütsingle „Taste of Fire“ (2022) haben sie Single um Single nachgelegt – zuletzt „Nobody's Wish“ und „Exitus“. Oder wie die Band es selbst sagt: We hit like a truck.",
   "members": [
     { "name": "Yannick Vater", "role": "Vocals", "photo": "" },
     { "name": "Domenik Neubert", "role": "Gitarre", "photo": "" },
     { "name": "Paul Stein", "role": "Lead-Gitarre", "photo": "" },
-    { "name": "Alexander Trinks", "role": "Bass", "photo": "" },
-    { "name": "Tim Stolze", "role": "Drums", "photo": "" }
+    { "name": "Philipp Meusel", "role": "Drums", "photo": "" }
   ],
   "bookingEmail": "backmarsvillage@gmail.com",
   "links": [
