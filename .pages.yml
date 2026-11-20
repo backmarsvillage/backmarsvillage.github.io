@@ -5,7 +5,7 @@ media:
 
 content:
   - name: gigs
-    label: Gigs / Live-Termine
+    label: "🎸 Shows / Live-Termine"
     type: file
     path: content/gigs.json
     format: json
@@ -23,45 +23,23 @@ content:
         type: string
         required: true
       - name: venue
-        label: Location
+        label: Location / Club
         type: string
       - name: address
         label: Adresse
         type: string
       - name: with
-        label: Mit (andere Bands)
+        label: Zusammen mit (andere Bands)
         type: string
       - name: tickets
-        label: Ticket-/Event-Link
+        label: Ticket- oder Event-Link
         type: string
       - name: note
         label: Hinweis (z. B. Eintritt frei)
         type: string
 
-  - name: videos
-    label: Videos
-    type: file
-    path: content/videos.json
-    format: json
-    list: true
-    fields:
-      - name: title
-        label: Titel
-        type: string
-        required: true
-      - name: kind
-        label: Art (z. B. Official Music Video)
-        type: string
-      - name: youtube
-        label: YouTube-ID (der Teil nach watch?v=)
-        type: string
-        required: true
-      - name: featured
-        label: Groß oben anzeigen
-        type: boolean
-
   - name: releases
-    label: Releases
+    label: "💿 Songs / Veröffentlichungen"
     type: file
     path: content/releases.json
     format: json
@@ -72,65 +50,126 @@ content:
         type: string
         required: true
       - name: type
-        label: Typ (Single, EP, Album)
-        type: string
+        label: Art
+        type: select
+        options:
+          values: [Single, EP, Album, Debut-Single]
       - name: date
-        label: Erscheinungsdatum
+        label: Erscheinungsdatum (bestimmt die Reihenfolge – neueste zuerst)
         type: date
       - name: cover
-        label: Cover (Bild hochladen oder URL)
+        label: Cover (Bild hochladen oder Bild-Link)
         type: image
       - name: spotify
-        label: Spotify-Link
+        label: Spotify-Link (Album/Single oder Song)
         type: string
       - name: apple
         label: Apple-Music-Link
         type: string
       - name: tracks
-        label: Tracks
+        label: Songs auf dem Release (optional)
+        type: string
+      - name: appleId
+        label: Apple-ID (wird automatisch gesetzt – leer lassen)
         type: string
 
+  - name: videos
+    label: "🎬 Videos"
+    type: file
+    path: content/videos.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: kind
+        label: Art (z. B. Official Music Video, Live)
+        type: string
+      - name: youtube
+        label: YouTube-ID (der Teil nach „watch?v=“ im Link)
+        type: string
+        required: true
+      - name: featured
+        label: Groß oben anzeigen
+        type: boolean
+
   - name: site
-    label: Website-Inhalte
+    label: "✏️ Texte, Bilder & Band"
     type: file
     path: content/site.json
     format: json
     fields:
       - name: bandName
-        label: Bandname
-        type: string
-      - name: tagline
-        label: Slogan
+        label: Bandname (groß im Titelbereich)
         type: string
       - name: subline
-        label: Unterzeile
+        label: Kleine Zeile über dem Bandnamen
         type: string
-      - name: logo
-        label: Logo
-        type: image
+      - name: tagline
+        label: Slogan unter dem Bandnamen
+        type: string
       - name: heroImage
-        label: Startbild (Hintergrund oben)
+        label: Hintergrundbild oben (wird gezeigt, wenn kein Video läuft)
         type: image
       - name: heroVideos
         label: Hintergrundvideos oben (YouTube-IDs, Reihenfolge = Abspielfolge)
         type: string
         list: true
-      - name: latestRelease
-        label: Neueste Veröffentlichung
+      - name: texts
+        label: Überschriften & Buttons
         type: object
         fields:
-          - name: title
-            label: Titel
-            type: string
-          - name: text
-            label: Text
-            type: string
-          - name: spotifyEmbed
-            label: Spotify-Embed-Link (open.spotify.com/embed/album/…)
-            type: string
-          - name: cover
-            label: Cover
-            type: image
+          - name: hero
+            label: Titelbereich
+            type: object
+            fields:
+              - { name: button1, label: Roter Button, type: string }
+              - { name: button2, label: Zweiter Button, type: string }
+          - name: live
+            label: Bereich „Live“
+            type: object
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, type: string }
+              - { name: title, label: Überschrift, type: string }
+              - { name: empty, label: Text wenn keine Shows anstehen, type: string }
+          - name: release
+            label: Bereich „Veröffentlichungen“ (Slider)
+            type: object
+            fields:
+              - { name: eyebrowLatest, label: Kleine Zeile beim neuesten Release, type: string }
+              - { name: eyebrowOlder, label: Kleine Zeile bei älteren Releases, type: string }
+          - name: videos
+            label: Bereich „Videos“
+            type: object
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, type: string }
+              - { name: title, label: Überschrift, type: string }
+          - name: music
+            label: Bereich „Musik“
+            type: object
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, type: string }
+              - { name: title, label: Überschrift, type: string }
+          - name: band
+            label: Bereich „Band“
+            type: object
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, type: string }
+              - { name: title, label: Überschrift, type: string }
+          - name: insta
+            label: Bereich „Instagram“
+            type: object
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, type: string }
+              - { name: title, label: Überschrift, type: string }
+          - name: contact
+            label: Bereich „Booking & Kontakt“
+            type: object
+            fields:
+              - { name: title, label: Überschrift, type: string }
+              - { name: text, label: Text, type: string }
       - name: bio
         label: Bandbeschreibung
         type: text
@@ -139,33 +178,26 @@ content:
         type: object
         list: true
         fields:
-          - name: name
-            label: Name
-            type: string
-          - name: role
-            label: Instrument
-            type: string
-          - name: photo
-            label: Foto
-            type: image
+          - { name: name, label: Name, type: string }
+          - { name: role, label: Instrument, type: string }
+          - { name: photo, label: Foto (optional), type: image }
       - name: bookingEmail
         label: Booking-E-Mail
         type: string
       - name: links
-        label: Links (Streaming & Social)
+        label: Links (Streaming & Social Media)
         type: object
         list: true
         fields:
-          - name: label
-            label: Name
-            type: string
-          - name: url
-            label: URL
-            type: string
+          - { name: label, label: Name, type: string }
+          - { name: url, label: Link, type: string }
       - name: instagramPosts
-        label: Instagram-Posts (Links)
+        label: Instagram-Posts (Links zu Posts/Reels)
         type: string
         list: true
+      - name: logo
+        label: Logo (klein oben links im Menü)
+        type: image
       - name: impressum
-        label: Impressum
+        label: Impressum (Pflicht!)
         type: text

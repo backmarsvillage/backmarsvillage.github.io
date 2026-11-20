@@ -4,6 +4,12 @@ Offizielle Website der Leipziger Metal-Band **Backmars Village**. Statische Seit
 
 ## Inhalte bearbeiten
 
+**Am einfachsten:** <https://backmarsvillage.github.io/admin/> öffnen → „Anmelden & bearbeiten“.
+Weitere Bandmitglieder können in Pages CMS per E-Mail eingeladen werden (kein GitHub-Konto nötig).
+
+**Neue Releases** von Spotify/Apple Music trägt ein Bot automatisch ein (2× täglich, `.github/workflows/update-releases.yml`).
+Manuell anstoßen: Reiter **Actions** → „Neue Releases automatisch eintragen“ → **Run workflow**.
+
 ### Variante A – Pages CMS (komfortabel, mit Formularen)
 1. <https://app.pagescms.org> öffnen → **Sign in with GitHub**.
 2. Beim ersten Mal die Pages-CMS-App für dieses Repository freigeben.
@@ -18,7 +24,7 @@ Im Ordner `content/` die JSON-Datei öffnen → Stift-Symbol → bearbeiten → 
 | `content/gigs.json` | Live-Termine (vergangene wandern automatisch nach „Vergangene Shows“) |
 | `content/videos.json` | YouTube-Videos (`featured: true` = groß oben) |
 | `content/releases.json` | Diskografie mit Covern und Links |
-| `content/site.json` | Texte, Mitglieder, Links, Instagram-Posts, Impressum |
+| `content/site.json` | Texte & Überschriften, Hintergrund, Mitglieder, Links, Instagram-Posts, Impressum |
 
 **Neuer Gig (Beispiel):**
 ```json

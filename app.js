@@ -5,6 +5,7 @@
   const esc = (s = "") => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const img = (src = "") => (src.startsWith("/") && !src.startsWith("//") ? src.slice(1) : src); // CMS-Pfade relativ machen
   const MONTHS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+  let TX = {}; // Texte aus content/site.json → texts
   const AUTOLOAD = true; // externe Medien (YouTube, Spotify, Instagram) direkt laden; false = erst per Klick
 
   const load = name => fetch(`content/${name}.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null);
@@ -70,13 +71,14 @@
     if (s.heroImage) $("#heroBg").style.backgroundImage = `url("${img(s.heroImage)}")`;
     heroVideo(s.heroVideos);
 
-    const r = s.latestRelease || {};
-    $("#relTitle").textContent = r.title || "";
-    $("#relText").textContent = r.text || "";
-    if (r.cover) { $("#relCover").src = img(r.cover); $("#relCover").alt = `Cover ${r.title}`; }
-    if (r.spotifyEmbed) placeholder($("#relEmbed"), {
-      iframe: `<iframe src="${esc(r.spotifyEmbed)}?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify"></iframe>`,
-      label: "Auf Spotify anhören", note: "Lädt den Spotify-Player (Datenübertragung an Spotify)."
+    // Bandname groß im Titelbereich (Zeilenumbruch beim Leerzeichen)
+    if (s.bandName) $("#heroTitle").innerHTML = esc(s.bandName).replace(" ", "<br>");
+
+    // Überschriften & Texte aus dem CMS (data-text="bereich.feld")
+    const T = TX = s.texts || {};
+    document.querySelectorAll("[data-text]").forEach(el => {
+      const v = el.dataset.text.split(".").reduce((o, k) => (o || {})[k], T);
+      if (v) el.textContent = v;
     });
 
     const links = s.links || [];
@@ -134,9 +136,68 @@
     });
   }
 
+  /* ---------- Veröffentlichungen: Slider (neueste zuerst, ‹ › blättert) ---------- */
+  function renderSlider(list, texts) {
+    const track = $("#relTrack"), dots = $("#relDots");
+    if (!list || !list.length) { $("#release").hidden = true; return; }
+    const labelNew = (texts && texts.release && texts.release.eyebrowLatest) || "Neueste Veröffentlichung";
+    const labelOld = (texts && texts.release && texts.release.eyebrowOlder) || "Veröffentlichung";
+    const embedUrl = r => {
+      const m = (r.spotify || "").match(/open\.spotify\.com\/(?:intl-[a-z]+\/)?(album|track)\/([A-Za-z0-9]+)/);
+      return m ? `https://open.spotify.com/embed/${m[1]}/${m[2]}?utm_source=generator&theme=0` : "";
+    };
+    const fmt = d => { const x = new Date(d + "T12:00:00"); return isNaN(x) ? "" : x.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" }); };
+    track.innerHTML = list.map((r, i) => `
+      <article class="slide" aria-roledescription="Slide" aria-label="${i + 1} von ${list.length}">
+        <img class="release__cover" src="${esc(img(r.cover))}" alt="Cover ${esc(r.title)}" loading="${i < 2 ? "eager" : "lazy"}">
+        <div class="slide__info">
+          <p class="eyebrow">${esc(i === 0 ? labelNew : labelOld)} · ${esc(r.type || "Single")}</p>
+          <h2 class="h2 slide__title">${esc(r.title)}</h2>
+          <p class="lead slide__meta">${esc(fmt(r.date))}${r.tracks ? " · " + esc(r.tracks) : ""}</p>
+          <div class="slide__links">
+            ${r.spotify ? `<a class="chip" href="${esc(r.spotify)}" target="_blank" rel="noopener">Spotify</a>` : ""}
+            ${r.apple ? `<a class="chip" href="${esc(r.apple)}" target="_blank" rel="noopener">Apple Music</a>` : ""}
+          </div>
+          <div class="embed embed--spotify" data-embed="${esc(embedUrl(r))}"></div>
+        </div>
+      </article>`).join("");
+    dots.innerHTML = list.map((r, i) => `<button aria-label="${esc(r.title)}" data-i="${i}"></button>`).join("");
+
+    let cur = 0;
+    const loadEmbed = i => {
+      const box = track.children[i]?.querySelector("[data-embed]");
+      if (!box || box.dataset.loaded || !box.dataset.embed) return;
+      box.dataset.loaded = "1";
+      placeholder(box, {
+        iframe: `<iframe src="${box.dataset.embed}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify"></iframe>`,
+        label: "Auf Spotify anhören", note: "Lädt den Spotify-Player."
+      });
+    };
+    const go = i => {
+      cur = Math.max(0, Math.min(list.length - 1, i));
+      track.style.transform = `translateX(-${cur * 100}%)`;
+      $("#relNewer").disabled = cur === 0;
+      $("#relOlder").disabled = cur === list.length - 1;
+      [...dots.children].forEach((d, k) => d.classList.toggle("on", k === cur));
+      loadEmbed(cur);
+    };
+    $("#relNewer").onclick = () => go(cur - 1);
+    $("#relOlder").onclick = () => go(cur + 1);
+    dots.onclick = e => { if (e.target.dataset.i) go(+e.target.dataset.i); };
+    // Wischen auf dem Handy
+    let x0 = null;
+    track.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener("touchend", e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+    });
+    $("#relSlider").addEventListener("keydown", e => { if (e.key === "ArrowRight") go(cur + 1); if (e.key === "ArrowLeft") go(cur - 1); });
+    go(0);
+  }
+
   function renderReleases(list) {
     if (!list) return;
-    list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
     $("#releaseGrid").innerHTML = list.map(r => `
       <a class="rcard reveal" href="${esc(r.spotify || r.apple || "#")}" target="_blank" rel="noopener">
         <img loading="lazy" src="${esc(img(r.cover))}" alt="Cover ${esc(r.title)}">
@@ -165,7 +226,7 @@
     const today = new Date().toISOString().slice(0, 10);
     const up = list.filter(g => g.date >= today).sort((a, b) => a.date.localeCompare(b.date));
     const past = list.filter(g => g.date < today).sort((a, b) => b.date.localeCompare(a.date));
-    $("#gigs").innerHTML = up.length ? up.map(g => gigHTML(g, false)).join("") : `<p class="empty">Aktuell keine Termine – folgt uns auf Instagram für News.</p>`;
+    $("#gigs").innerHTML = up.length ? up.map(g => gigHTML(g, false)).join("") : `<p class="empty">${esc((TX.live && TX.live.empty) || "Aktuell keine Termine – folgt uns auf Instagram für News.")}</p>`;
     if (up.length) {
       const n = up[0], d = new Date(n.date + "T12:00:00");
       const ng = $("#nextGig");
@@ -193,6 +254,7 @@
 
   ui();
   Promise.all([load("site"), load("videos"), load("releases"), load("gigs")]).then(([s, v, r, g]) => {
-    renderSite(s); renderVideos(v); renderReleases(r); renderGigs(g); reveal();
+    if (r) r.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    renderSite(s); renderVideos(v); renderSlider(r, s && s.texts); renderReleases(r); renderGigs(g); reveal();
   });
 })();

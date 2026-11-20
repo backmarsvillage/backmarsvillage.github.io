@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -38,11 +38,11 @@
     <div class="hero__bg" id="heroBg"><div class="hero__video" id="heroVideo" aria-hidden="true"></div></div>
     <div class="hero__inner">
       <p class="eyebrow" data-bind="subline">Modern Metal aus Leipzig</p>
-      <h1 class="hero__title">Backmars<br>Village</h1>
+      <h1 class="hero__title" id="heroTitle">Backmars<br>Village</h1>
       <p class="hero__tag" data-bind="tagline">We hit like a truck.</p>
       <div class="hero__cta">
-        <a href="#live" class="btn btn--red">Live-Termine</a>
-        <a href="#videos" class="btn btn--ghost">Video ansehen</a>
+        <a href="#live" class="btn btn--red" data-text="hero.button1">Live-Termine</a>
+        <a href="#videos" class="btn btn--ghost" data-text="hero.button2">Video ansehen</a>
       </div>
       <a href="#live" class="next-gig" id="nextGig" hidden></a>
     </div>
@@ -51,8 +51,8 @@
 
   <section class="section section--live" id="live">
     <div class="wrap">
-      <p class="eyebrow">Tour &amp; Shows</p>
-      <h2 class="h2">Live</h2>
+      <p class="eyebrow" data-text="live.eyebrow">Tour &amp; Shows</p>
+      <h2 class="h2" data-text="live.title">Live</h2>
       <div class="gigs" id="gigs"></div>
       <details class="past" id="pastWrap" hidden>
         <summary>Vergangene Shows</summary>
@@ -62,21 +62,20 @@
   </section>
 
   <section class="section release" id="release">
-    <div class="wrap release__grid">
-      <img class="release__cover" id="relCover" alt="">
-      <div>
-        <p class="eyebrow">Neueste Veröffentlichung</p>
-        <h2 class="h2" id="relTitle"></h2>
-        <p class="lead" id="relText"></p>
-        <div class="embed embed--spotify" id="relEmbed"></div>
+    <div class="wrap">
+      <div class="slider" id="relSlider">
+        <button class="slider__nav slider__nav--prev" id="relNewer" aria-label="Neuere Veröffentlichung">‹</button>
+        <div class="slider__viewport"><div class="slider__track" id="relTrack"></div></div>
+        <button class="slider__nav slider__nav--next" id="relOlder" aria-label="Ältere Veröffentlichung">›</button>
       </div>
+      <div class="slider__dots" id="relDots"></div>
     </div>
   </section>
 
   <section class="section" id="videos">
     <div class="wrap">
-      <p class="eyebrow">Musikvideos</p>
-      <h2 class="h2">Videos</h2>
+      <p class="eyebrow" data-text="videos.eyebrow">Musikvideos</p>
+      <h2 class="h2" data-text="videos.title">Videos</h2>
       <div class="video-feature" id="videoFeature"></div>
       <div class="video-grid" id="videoGrid"></div>
     </div>
@@ -84,8 +83,8 @@
 
   <section class="section section--dark" id="musik">
     <div class="wrap">
-      <p class="eyebrow">Diskografie</p>
-      <h2 class="h2">Musik</h2>
+      <p class="eyebrow" data-text="music.eyebrow">Diskografie</p>
+      <h2 class="h2" data-text="music.title">Musik</h2>
       <div class="platforms" id="platforms"></div>
       <div class="release-grid" id="releaseGrid"></div>
     </div>
@@ -94,8 +93,8 @@
   <section class="section section--dark" id="band">
     <div class="wrap band">
       <div>
-        <p class="eyebrow">Über uns</p>
-        <h2 class="h2">Die Band</h2>
+        <p class="eyebrow" data-text="band.eyebrow">Über uns</p>
+        <h2 class="h2" data-text="band.title">Die Band</h2>
         <p class="lead" data-bind="bio"></p>
       </div>
       <ul class="members" id="members"></ul>
@@ -104,16 +103,16 @@
 
   <section class="section" id="insta">
     <div class="wrap">
-      <p class="eyebrow">@backmars_village</p>
-      <h2 class="h2">Instagram</h2>
+      <p class="eyebrow" data-text="insta.eyebrow">@backmars_village</p>
+      <h2 class="h2" data-text="insta.title">Instagram</h2>
       <div class="insta-grid" id="instaGrid"></div>
     </div>
   </section>
 
   <section class="section section--red" id="kontakt">
     <div class="wrap contact">
-      <h2 class="h2">Booking &amp; Kontakt</h2>
-      <p class="lead">Ihr wollt uns auf eurer Bühne? Schreibt uns.</p>
+      <h2 class="h2" data-text="contact.title">Booking &amp; Kontakt</h2>
+      <p class="lead" data-text="contact.text">Ihr wollt uns auf eurer Bühne? Schreibt uns.</p>
       <a class="btn btn--light" id="mailBtn" href="#">E-Mail schreiben</a>
       <div class="socials" id="socials"></div>
     </div>
@@ -132,6 +131,6 @@
     <form method="dialog"><button class="btn btn--red">Schließen</button></form>
   </dialog>
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
