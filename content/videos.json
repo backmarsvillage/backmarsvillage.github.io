@@ -1,0 +1,11 @@
+[
+  { "title": "Nobody's Wish", "kind": "Official Music Video", "youtube": "_cANZMa_zCE", "featured": true },
+  { "title": "Deadweight", "kind": "Official Music Video", "youtube": "cLcz7bJAEoE", "featured": false },
+  { "title": "Break Loose", "kind": "Official Music Video", "youtube": "1jSwe6y4OEs", "featured": false },
+  { "title": "Lucky Day", "kind": "Official Video", "youtube": "YOtcsZ5ek8Q", "featured": false },
+  { "title": "Desolation", "kind": "Live", "youtube": "Fy0IvvD3wtM", "featured": false },
+  { "title": "Backmars Village", "kind": "Performance Video", "youtube": "O7RXltAApyo", "featured": false },
+  { "title": "Point of No Return", "kind": "Guitar Solo Playthrough", "youtube": "m3dZfHOaxOs", "featured": false },
+  { "title": "Misery Loves Company", "kind": "Guitar Playthrough", "youtube": "atymMQ9eHCE", "featured": false },
+  { "title": "Rebuild", "kind": "Video", "youtube": "AQgYTLv7EdI", "featured": false }
+]
