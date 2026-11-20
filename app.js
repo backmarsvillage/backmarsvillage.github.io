@@ -5,15 +5,11 @@
   const esc = (s = "") => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const img = (src = "") => (src.startsWith("/") && !src.startsWith("//") ? src.slice(1) : src); // CMS-Pfade relativ machen
   const MONTHS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
-  const CONSENT_KEY = "bmv-media-consent";
-
-  const getConsent = () => { try { return localStorage.getItem(CONSENT_KEY); } catch { return null; } };
-  const setConsent = v => { try { v ? localStorage.setItem(CONSENT_KEY, v) : localStorage.removeItem(CONSENT_KEY); } catch {} };
+  const AUTOLOAD = true; // externe Medien (YouTube, Spotify, Instagram) direkt laden; false = erst per Klick
 
   const load = name => fetch(`content/${name}.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null);
 
-  /* ---------- externe Medien (2-Klick-Lösung) ---------- */
-  const embeds = [];
+  /* ---------- externe Medien ---------- */
   function placeholder(el, { iframe, label, bg, note }) {
     const ph = document.createElement("button");
     ph.className = "ph";
@@ -24,8 +20,7 @@
     ph.addEventListener("click", activate);
     el.innerHTML = "";
     el.appendChild(ph);
-    embeds.push(activate);
-    if (getConsent() === "all") activate();
+    if (AUTOLOAD) activate();
   }
   const yt = (id, autoplay) => `<iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0${autoplay ? "&autoplay=1" : ""}" title="YouTube Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
 
@@ -132,6 +127,12 @@
     const up = list.filter(g => g.date >= today).sort((a, b) => a.date.localeCompare(b.date));
     const past = list.filter(g => g.date < today).sort((a, b) => b.date.localeCompare(a.date));
     $("#gigs").innerHTML = up.length ? up.map(g => gigHTML(g, false)).join("") : `<p class="empty">Aktuell keine Termine – folgt uns auf Instagram für News.</p>`;
+    if (up.length) {
+      const n = up[0], d = new Date(n.date + "T12:00:00");
+      const ng = $("#nextGig");
+      ng.innerHTML = `<span class="next-gig__label">Nächste Show</span><span class="next-gig__date">${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}</span><span class="next-gig__where">${esc(n.city)}${n.venue ? " · " + esc(n.venue) : ""}${n.with ? " · mit " + esc(n.with) : ""}</span>`;
+      ng.hidden = false;
+    }
     if (past.length) { $("#pastWrap").hidden = false; $("#pastGigs").innerHTML = past.map(g => gigHTML(g, true)).join(""); }
   }
 
@@ -144,12 +145,6 @@
     links.addEventListener("click", e => { if (e.target.tagName === "A") links.classList.remove("open"); });
 
     $("#impressumLink").addEventListener("click", e => { e.preventDefault(); $("#impressum").showModal(); });
-    $("#consentReset").addEventListener("click", e => { e.preventDefault(); setConsent(null); location.reload(); });
-
-    const banner = $("#consent");
-    if (!getConsent()) banner.hidden = false;
-    $("#consentYes").addEventListener("click", () => { setConsent("all"); banner.hidden = true; embeds.forEach(f => f()); });
-    $("#consentNo").addEventListener("click", () => { setConsent("click"); banner.hidden = true; });
   }
 
   function reveal() {

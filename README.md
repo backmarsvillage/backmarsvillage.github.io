@@ -30,4 +30,4 @@ Eigene Fotos über Pages CMS hochladen (landen in `images/`) oder per **Add file
 
 ## Wichtig
 - **Impressum** in `content/site.json` ausfüllen (Pflicht in Deutschland).
-- Videos/Spotify/Instagram werden erst nach Zustimmung geladen (DSGVO-freundliche 2-Klick-Lösung).
+- Videos/Spotify/Instagram laden automatisch. Für eine 2-Klick-Lösung in `app.js` `AUTOLOAD = false` setzen.
