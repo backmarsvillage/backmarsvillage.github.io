@@ -4,32 +4,113 @@
   "subline": "Modern Metal aus Leipzig",
   "logo": "https://yt3.googleusercontent.com/WmlIJMH4s2DI4sU5pfPwK8xTrJpig3Y0DQm3TYFIp1LH9LFID8PJZ20zvvWQBUx20yuYqFH3Pw=s600-c-k-c0x00ffffff-no-rj",
   "heroImage": "https://yt3.googleusercontent.com/YMLCNMKagXBMim_LvCL8J1KTx3ytKQsGybLHw1BsVdav78mdAVt9VQNSNu-TTW_av2dIZlkc=w2560-k-c0xffffffff-no-nd-rj",
-  "heroVideos": ["YOtcsZ5ek8Q", "cLcz7bJAEoE", "1jSwe6y4OEs", "_cANZMa_zCE", "AQgYTLv7EdI"],
-  "latestRelease": {
-    "title": "Exitus",
-    "text": "Die neue Single – jetzt überall streamen.",
-    "spotifyEmbed": "https://open.spotify.com/embed/album/3940WFByQvukqjhQXM7CCx",
-    "cover": "https://i.scdn.co/image/ab67616d0000b273d1aa0c1ac34738d0df158c40"
+  "heroVideos": [
+    "YOtcsZ5ek8Q",
+    "cLcz7bJAEoE",
+    "1jSwe6y4OEs",
+    "_cANZMa_zCE",
+    "AQgYTLv7EdI"
+  ],
+  "texts": {
+    "hero": {
+      "button1": "Live-Termine",
+      "button2": "Video ansehen"
+    },
+    "live": {
+      "eyebrow": "Tour & Shows",
+      "title": "Live",
+      "empty": "Aktuell keine Termine – folgt uns auf Instagram für News."
+    },
+    "release": {
+      "eyebrowLatest": "Neueste Veröffentlichung",
+      "eyebrowOlder": "Veröffentlichung"
+    },
+    "videos": {
+      "eyebrow": "Musikvideos",
+      "title": "Videos"
+    },
+    "music": {
+      "eyebrow": "Diskografie",
+      "title": "Musik"
+    },
+    "band": {
+      "eyebrow": "Über uns",
+      "title": "Die Band"
+    },
+    "insta": {
+      "eyebrow": "@backmars_village",
+      "title": "Instagram"
+    },
+    "contact": {
+      "title": "Booking & Kontakt",
+      "text": "Ihr wollt uns auf eurer Bühne? Schreibt uns."
+    }
   },
   "bio": "Gegründet in den Jahren der Pandemie, wurde der Sound von Backmars Village von diesen unruhigen Zeiten geprägt – und wird es bleiben. Explosive Riffs, wilde Vocals, präzise Soli und thrashendes Drumming: Die Leipziger Metal-Band nimmt dich mit auf einen Ritt durch eine zerfallende, dystopische Klanglandschaft. Seit der Debütsingle „Taste of Fire“ (2022) haben sie Single um Single nachgelegt – zuletzt „Nobody's Wish“ und „Exitus“. Oder wie die Band es selbst sagt: We hit like a truck.",
   "members": [
-    { "name": "Yannick Vater", "role": "Vocals", "photo": "" },
-    { "name": "Domenik Neubert", "role": "Gitarre", "photo": "" },
-    { "name": "Paul Stein", "role": "Lead-Gitarre", "photo": "" },
-    { "name": "Philipp Meusel", "role": "Drums", "photo": "" }
+    {
+      "name": "Yannick Vater",
+      "role": "Vocals",
+      "photo": ""
+    },
+    {
+      "name": "Domenik Neubert",
+      "role": "Gitarre",
+      "photo": ""
+    },
+    {
+      "name": "Paul Stein",
+      "role": "Gitarre",
+      "photo": ""
+    },
+    {
+      "name": "Philipp Meusel",
+      "role": "Drums",
+      "photo": ""
+    }
   ],
   "bookingEmail": "backmarsvillage@gmail.com",
   "links": [
-    { "label": "Spotify", "url": "https://open.spotify.com/artist/0dgStecxqQ9sBurlK0tDnI" },
-    { "label": "Apple Music", "url": "https://music.apple.com/de/artist/backmars-village/1637131252" },
-    { "label": "YouTube Music", "url": "https://music.youtube.com/channel/UCCJz3fo5OJUbKEEWcTVQejg" },
-    { "label": "YouTube", "url": "https://www.youtube.com/@backmarsvillage" },
-    { "label": "Instagram", "url": "https://www.instagram.com/backmars_village/" },
-    { "label": "TikTok", "url": "https://www.tiktok.com/@backmars.village" },
-    { "label": "Bandcamp", "url": "https://backmarsvillage.bandcamp.com/" },
-    { "label": "Amazon Music", "url": "https://music.amazon.de/search/Backmars%20Village" },
-    { "label": "Linktree", "url": "https://linktr.ee/BackmarsVillage" },
-    { "label": "gigmit (Booking)", "url": "https://www.gigmit.com/backmars-village" }
+    {
+      "label": "Spotify",
+      "url": "https://open.spotify.com/artist/0dgStecxqQ9sBurlK0tDnI"
+    },
+    {
+      "label": "Apple Music",
+      "url": "https://music.apple.com/de/artist/backmars-village/1637131252"
+    },
+    {
+      "label": "YouTube Music",
+      "url": "https://music.youtube.com/channel/UCCJz3fo5OJUbKEEWcTVQejg"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@backmarsvillage"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/backmars_village/"
+    },
+    {
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@backmars.village"
+    },
+    {
+      "label": "Bandcamp",
+      "url": "https://backmarsvillage.bandcamp.com/"
+    },
+    {
+      "label": "Amazon Music",
+      "url": "https://music.amazon.de/search/Backmars%20Village"
+    },
+    {
+      "label": "Linktree",
+      "url": "https://linktr.ee/BackmarsVillage"
+    },
+    {
+      "label": "gigmit (Booking)",
+      "url": "https://www.gigmit.com/backmars-village"
+    }
   ],
   "instagramPosts": [
     "https://www.instagram.com/p/DVO6x-CjbKk/",
@@ -39,5 +120,5 @@
     "https://www.instagram.com/reel/DYWcpYht75K/",
     "https://www.instagram.com/reel/DXbhBHajYtQ/"
   ],
-  "impressum": "Angaben gemäß § 5 DDG:\n\n[Name der verantwortlichen Person]\n[Straße Hausnummer]\n[PLZ Ort]\n\nKontakt: backmarsvillage@gmail.com\n\n→ Bitte im CMS unter „Website-Inhalte → Impressum“ ausfüllen."
+  "impressum": "Angaben gemäß § 5 DDG:\n\n[Name der verantwortlichen Person]\n[Straße Hausnummer]\n[PLZ Ort]\n\nKontakt: backmarsvillage@gmail.com\n\n→ Bitte im CMS unter „Texte, Bilder & Band → Impressum“ ausfüllen."
 }
