@@ -52,6 +52,9 @@
     const sc = document.createElement("script");
     sc.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(sc);
+    // falls der Browser Autoplay blockiert: bei der ersten Interaktion (Tippen/Klicken/Taste) starten
+    const kick = () => { if (player && player.playVideo) { player.mute(); player.playVideo(); } };
+    ["pointerdown", "touchstart", "keydown"].forEach(ev => addEventListener(ev, kick, { once: true, passive: true }));
     // außerhalb des Sichtbereichs pausieren (spart Akku & Daten)
     new IntersectionObserver(([e]) => {
       if (!player || !player.playVideo) return;
