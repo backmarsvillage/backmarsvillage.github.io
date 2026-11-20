@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Backmars Village – Modern Metal aus Leipzig</title>
+  <meta name="description" content="Backmars Village – Modern Metal aus Leipzig. We hit like a truck. Musikvideos, Releases, Live-Termine und Booking.">
+  <meta property="og:title" content="Backmars Village">
+  <meta property="og:description" content="Modern Metal aus Leipzig. We hit like a truck.">
+  <meta property="og:image" content="https://i.ytimg.com/vi/_cANZMa_zCE/maxresdefault.jpg">
+  <meta name="theme-color" content="#070708">
+  <link rel="icon" href="https://yt3.googleusercontent.com/WmlIJMH4s2DI4sU5pfPwK8xTrJpig3Y0DQm3TYFIp1LH9LFID8PJZ20zvvWQBUx20yuYqFH3Pw=s64-c-k-c0x00ffffff-no-rj">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" id="top">
+    <a href="#top" class="nav__brand" aria-label="Backmars Village – nach oben">
+      <img data-bind-src="logo" alt="" class="nav__logo">
+      <span>Backmars Village</span>
+    </a>
+    <button class="nav__toggle" aria-label="Menü" aria-expanded="false">☰</button>
+    <nav class="nav__links">
+      <a href="#release">Neu</a>
+      <a href="#videos">Videos</a>
+      <a href="#musik">Musik</a>
+      <a href="#live">Live</a>
+      <a href="#band">Band</a>
+      <a href="#kontakt">Booking</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero__bg" id="heroBg"></div>
+    <div class="hero__inner">
+      <img data-bind-src="logo" alt="Backmars Village Logo" class="hero__logo">
+      <p class="eyebrow" data-bind="subline">Modern Metal aus Leipzig</p>
+      <h1 class="hero__title">Backmars<br>Village</h1>
+      <p class="hero__tag" data-bind="tagline">We hit like a truck.</p>
+      <div class="hero__cta">
+        <a href="#videos" class="btn btn--red">Video ansehen</a>
+        <a href="#live" class="btn btn--ghost">Live-Termine</a>
+      </div>
+    </div>
+    <a href="#release" class="hero__scroll" aria-label="Weiter">↓</a>
+  </section>
+
+  <section class="section release" id="release">
+    <div class="wrap release__grid">
+      <img class="release__cover" id="relCover" alt="">
+      <div>
+        <p class="eyebrow">Neueste Veröffentlichung</p>
+        <h2 class="h2" id="relTitle"></h2>
+        <p class="lead" id="relText"></p>
+        <div class="embed embed--spotify" id="relEmbed"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="videos">
+    <div class="wrap">
+      <p class="eyebrow">Musikvideos</p>
+      <h2 class="h2">Videos</h2>
+      <div class="video-feature" id="videoFeature"></div>
+      <div class="video-grid" id="videoGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="musik">
+    <div class="wrap">
+      <p class="eyebrow">Diskografie</p>
+      <h2 class="h2">Musik</h2>
+      <div class="platforms" id="platforms"></div>
+      <div class="release-grid" id="releaseGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="live">
+    <div class="wrap">
+      <p class="eyebrow">Tour &amp; Shows</p>
+      <h2 class="h2">Live</h2>
+      <div class="gigs" id="gigs"></div>
+      <details class="past" id="pastWrap" hidden>
+        <summary>Vergangene Shows</summary>
+        <div class="gigs gigs--past" id="pastGigs"></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="band">
+    <div class="wrap band">
+      <div>
+        <p class="eyebrow">Über uns</p>
+        <h2 class="h2">Die Band</h2>
+        <p class="lead" data-bind="bio"></p>
+      </div>
+      <ul class="members" id="members"></ul>
+    </div>
+  </section>
+
+  <section class="section" id="insta">
+    <div class="wrap">
+      <p class="eyebrow">@backmars_village</p>
+      <h2 class="h2">Instagram</h2>
+      <div class="insta-grid" id="instaGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section--red" id="kontakt">
+    <div class="wrap contact">
+      <h2 class="h2">Booking &amp; Kontakt</h2>
+      <p class="lead">Ihr wollt uns auf eurer Bühne? Schreibt uns.</p>
+      <a class="btn btn--light" id="mailBtn" href="#">E-Mail schreiben</a>
+      <div class="socials" id="socials"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Backmars Village · Leipzig</p>
+    <p><a href="#" id="impressumLink">Impressum &amp; Datenschutz</a> · <a href="#" id="consentReset">Externe Medien zurücksetzen</a></p>
+  </footer>
+
+  <dialog id="impressum" class="dialog">
+    <h2 class="h3">Impressum</h2>
+    <div id="impressumText" class="pre"></div>
+    <h2 class="h3">Datenschutz</h2>
+    <p>Diese Website wird über GitHub Pages bereitgestellt (GitHub Inc.). Beim Aufruf verarbeitet GitHub technisch notwendige Daten wie deine IP-Adresse. Schriftarten werden von Google Fonts geladen. Inhalte von YouTube, Spotify und Instagram werden erst geladen, wenn du sie aktiv freigibst; dabei werden Daten an diese Anbieter übertragen. Deine Auswahl wird lokal in deinem Browser gespeichert.</p>
+    <form method="dialog"><button class="btn btn--red">Schließen</button></form>
+  </dialog>
+
+  <div class="consent" id="consent" hidden>
+    <p>Diese Seite zeigt Videos, Musik und Posts von <b>YouTube, Spotify und Instagram</b>. Beim Laden werden Daten an diese Anbieter übertragen.</p>
+    <div>
+      <button class="btn btn--red" id="consentYes">Alle externen Medien laden</button>
+      <button class="btn btn--ghost" id="consentNo">Nur bei Klick</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+media:
+  input: images
+  output: images
+  extensions: [jpg, jpeg, png, webp, gif]
+
+content:
+  - name: gigs
+    label: Gigs / Live-Termine
+    type: file
+    path: content/gigs.json
+    format: json
+    list: true
+    fields:
+      - name: date
+        label: Datum
+        type: date
+        required: true
+      - name: time
+        label: Uhrzeit (z. B. 20:00)
+        type: string
+      - name: city
+        label: Stadt
+        type: string
+        required: true
+      - name: venue
+        label: Location
+        type: string
+      - name: address
+        label: Adresse
+        type: string
+      - name: with
+        label: Mit (andere Bands)
+        type: string
+      - name: tickets
+        label: Ticket-/Event-Link
+        type: string
+      - name: note
+        label: Hinweis (z. B. Eintritt frei)
+        type: string
+
+  - name: videos
+    label: Videos
+    type: file
+    path: content/videos.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: kind
+        label: Art (z. B. Official Music Video)
+        type: string
+      - name: youtube
+        label: YouTube-ID (der Teil nach watch?v=)
+        type: string
+        required: true
+      - name: featured
+        label: Groß oben anzeigen
+        type: boolean
+
+  - name: releases
+    label: Releases
+    type: file
+    path: content/releases.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: type
+        label: Typ (Single, EP, Album)
+        type: string
+      - name: date
+        label: Erscheinungsdatum
+        type: date
+      - name: cover
+        label: Cover (Bild hochladen oder URL)
+        type: image
+      - name: spotify
+        label: Spotify-Link
+        type: string
+      - name: apple
+        label: Apple-Music-Link
+        type: string
+      - name: tracks
+        label: Tracks
+        type: string
+
+  - name: site
+    label: Website-Inhalte
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: bandName
+        label: Bandname
+        type: string
+      - name: tagline
+        label: Slogan
+        type: string
+      - name: subline
+        label: Unterzeile
+        type: string
+      - name: logo
+        label: Logo
+        type: image
+      - name: heroImage
+        label: Startbild (Hintergrund oben)
+        type: image
+      - name: latestRelease
+        label: Neueste Veröffentlichung
+        type: object
+        fields:
+          - name: title
+            label: Titel
+            type: string
+          - name: text
+            label: Text
+            type: string
+          - name: spotifyEmbed
+            label: Spotify-Embed-Link (open.spotify.com/embed/album/…)
+            type: string
+          - name: cover
+            label: Cover
+            type: image
+      - name: bio
+        label: Bandbeschreibung
+        type: text
+      - name: members
+        label: Mitglieder
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: role
+            label: Instrument
+            type: string
+          - name: photo
+            label: Foto
+            type: image
+      - name: bookingEmail
+        label: Booking-E-Mail
+        type: string
+      - name: links
+        label: Links (Streaming & Social)
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Name
+            type: string
+          - name: url
+            label: URL
+            type: string
+      - name: instagramPosts
+        label: Instagram-Posts (Links)
+        type: string
+        list: true
+      - name: impressum
+        label: Impressum
+        type: text
