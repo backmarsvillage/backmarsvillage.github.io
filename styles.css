@@ -53,6 +53,10 @@ a{color:inherit}
 .hero__bg::after{content:"";position:absolute;inset:0;background:
   radial-gradient(ellipse at center,rgba(7,7,8,.15) 0%,rgba(7,7,8,.6) 70%,#070708 100%),
   linear-gradient(180deg,rgba(7,7,8,.2) 0%,rgba(7,7,8,0) 40%,rgba(7,7,8,.85) 100%)}
+.hero__video{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity 1.6s ease;container-type:size;pointer-events:none}
+.hero__video.is-playing{opacity:1}
+.hero__video iframe{position:absolute;top:50%;left:50%;width:max(100cqw,177.78cqh);height:max(100cqh,56.25cqw);
+  transform:translate(-50%,-50%) scale(1.3);border:0;pointer-events:none}
 @keyframes drift{to{transform:scale(1.12) translate(-1.5%,-1%)}}
 .hero__inner{position:relative;padding:7rem 1rem 4rem}
 .hero__logo{width:clamp(110px,16vw,170px);margin:0 auto 1.6rem;border-radius:50%;

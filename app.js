@@ -24,12 +24,48 @@
   }
   const yt = (id, autoplay) => `<iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0${autoplay ? "&autoplay=1" : ""}" title="YouTube Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
 
+  /* ---------- Hintergrundvideo im Titelbereich (Fallback: Titelbild) ---------- */
+  function heroVideo(ids) {
+    ids = (ids || []).map(v => String(v).trim()).filter(Boolean);
+    if (!ids.length) return;
+    const c = navigator.connection;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (c && (c.saveData || /2g/.test(c.effectiveType || ""))) return; // Datensparmodus / langsames Netz → nur Bild
+    const box = $("#heroVideo");
+    box.innerHTML = '<div id="heroPlayer"></div>';
+    let player;
+    window.onYouTubeIframeAPIReady = () => {
+      player = new YT.Player("heroPlayer", {
+        host: "https://www.youtube-nocookie.com",
+        videoId: ids[0],
+        playerVars: { autoplay: 1, mute: 1, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0, loop: 1, playlist: ids.join(",") },
+        events: {
+          onReady: e => { e.target.mute(); e.target.playVideo(); },
+          onStateChange: e => {
+            if (e.data === 1) box.classList.add("is-playing");          // läuft → Video einblenden
+            else if (e.data === 0 || e.data === -1) box.classList.remove("is-playing"); // Wechsel → kurz Bild
+          },
+          onError: () => box.classList.remove("is-playing")
+        }
+      });
+    };
+    const sc = document.createElement("script");
+    sc.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(sc);
+    // außerhalb des Sichtbereichs pausieren (spart Akku & Daten)
+    new IntersectionObserver(([e]) => {
+      if (!player || !player.playVideo) return;
+      e.isIntersecting ? player.playVideo() : player.pauseVideo();
+    }).observe($(".hero"));
+  }
+
   /* ---------- Rendering ---------- */
   function renderSite(s) {
     if (!s) return;
     document.querySelectorAll("[data-bind]").forEach(el => { const v = s[el.dataset.bind]; if (v) el.textContent = v; });
     document.querySelectorAll("[data-bind-src]").forEach(el => { const v = s[el.dataset.bindSrc]; if (v) el.src = img(v); });
     if (s.heroImage) $("#heroBg").style.backgroundImage = `url("${img(s.heroImage)}")`;
+    heroVideo(s.heroVideos);
 
     const r = s.latestRelease || {};
     $("#relTitle").textContent = r.title || "";

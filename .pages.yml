@@ -111,6 +111,10 @@ content:
       - name: heroImage
         label: Startbild (Hintergrund oben)
         type: image
+      - name: heroVideos
+        label: Hintergrundvideos oben (YouTube-IDs, Reihenfolge = Abspielfolge)
+        type: string
+        list: true
       - name: latestRelease
         label: Neueste Veröffentlichung
         type: object
