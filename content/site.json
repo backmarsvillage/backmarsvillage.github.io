@@ -44,7 +44,16 @@
     "contact": {
       "title": "Booking & Kontakt",
       "text": "Ihr wollt uns auf eurer Bühne? Schreibt uns."
+    },
+    "merch": {
+      "eyebrow": "Offizieller Merch",
+      "title": "Merch",
+      "text": "Shirts, Hoodies & mehr – auf Bestellung gedruckt und direkt zu dir nach Hause geschickt."
     }
+  },
+  "shop": {
+    "enabled": false,
+    "name": "backmarsvillage-merch-shop"
   },
   "bio": "Gegründet in den Jahren der Pandemie, wurde der Sound von Backmars Village von diesen unruhigen Zeiten geprägt – und wird es bleiben. Explosive Riffs, wilde Vocals, präzise Soli und thrashendes Drumming: Die Leipziger Metal-Band nimmt dich mit auf einen Ritt durch eine zerfallende, dystopische Klanglandschaft. Seit der Debütsingle „Taste of Fire“ (2022) haben sie Single um Single nachgelegt – zuletzt „Nobody's Wish“ und „Exitus“. Oder wie die Band es selbst sagt: We hit like a truck.",
   "members": [
