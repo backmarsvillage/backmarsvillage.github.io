@@ -63,6 +63,26 @@
     }).observe($(".hero"));
   }
 
+  /* ---------- Merch: Spreadshop ---------- */
+  function shopEmbed(shop) {
+    if (!shop || shop.enabled === false) return;
+    const name = String(shop.name || "").trim().replace(/^https?:\/\//, "").replace(/\.myspreadshop\..*$/, "");
+    if (!name) return;
+    $("#merch").hidden = false;
+    $("#navMerch").hidden = false;
+    window.spread_shop_config = {
+      prefix: `https://${name}.myspreadshop.de`,
+      shopName: name,
+      baseId: "shop",
+      locale: "de_DE",
+      updateMetadata: false
+    };
+    const sc = document.createElement("script");
+    sc.src = `https://${name}.myspreadshop.net/js/shopclient.nocache.js`;
+    sc.onerror = () => { $("#shop").innerHTML = `<p class="shop__loading">Shop gerade nicht erreichbar – <a href="https://${name}.myspreadshop.de" target="_blank" rel="noopener">hier direkt zum Shop</a>.</p>`; };
+    document.body.appendChild(sc);
+  }
+
   /* ---------- Rendering ---------- */
   function renderSite(s) {
     if (!s) return;
@@ -88,6 +108,9 @@
 
     $("#members").innerHTML = (s.members || []).map(m => `
       <li><div class="who">${m.photo ? `<img src="${esc(img(m.photo))}" alt="">` : ""}<b>${esc(m.name)}</b></div><span>${esc(m.role)}</span></li>`).join("");
+
+    // Merch-Shop (Spreadshop) einbetten, wenn im CMS ein Shop-Name eingetragen und eingeschaltet ist
+    shopEmbed(s.shop);
 
     if (s.bookingEmail) { $("#mailBtn").href = `mailto:${s.bookingEmail}?subject=Booking%20Backmars%20Village`; $("#mailBtn").textContent = s.bookingEmail; }
 

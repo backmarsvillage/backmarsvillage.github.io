@@ -200,3 +200,9 @@ a{color:inherit}
   .slider__nav{position:absolute;top:min(38vw,190px);z-index:2;width:44px;height:44px}
   .slider__nav--prev{left:-.4rem}.slider__nav--next{right:-.4rem}
 }
+
+/* merch / spreadshop */
+.section--merch{background:linear-gradient(180deg,#0f0d0e,#070708)}
+.shop{margin-top:2rem;min-height:320px;font-family:var(--sans);color:var(--ink);background:#0f0d0e;border:1px solid #2a2425;overflow:hidden}
+.shop__loading{color:var(--mute);text-align:center;padding:4rem 1rem;margin:0}
+.shop__loading a{color:var(--red)}

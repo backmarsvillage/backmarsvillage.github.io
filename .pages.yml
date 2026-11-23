@@ -164,12 +164,25 @@ content:
             fields:
               - { name: eyebrow, label: Kleine Zeile, type: string }
               - { name: title, label: Überschrift, type: string }
+          - name: merch
+            label: Bereich „Merch“
+            type: object
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, type: string }
+              - { name: title, label: Überschrift, type: string }
+              - { name: text, label: Text, type: string }
           - name: contact
             label: Bereich „Booking & Kontakt“
             type: object
             fields:
               - { name: title, label: Überschrift, type: string }
               - { name: text, label: Text, type: string }
+      - name: shop
+        label: "🛒 Merch-Shop (Spreadshop)"
+        type: object
+        fields:
+          - { name: enabled, label: Shop auf der Website anzeigen, type: boolean }
+          - { name: name, label: "Spreadshop-Name (der Teil vor .myspreadshop.de)", type: string }
       - name: bio
         label: Bandbeschreibung
         type: text
