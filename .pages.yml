@@ -95,6 +95,30 @@ content:
         label: Groß oben anzeigen
         type: boolean
 
+  - name: favorites
+    label: "⭐ Merch-Favoriten"
+    type: file
+    path: content/favorites.json
+    format: json
+    list: true
+    fields:
+      - name: link
+        label: "Produkt-Link aus dem Shop (im Shop Produkt öffnen → Adresse oben kopieren → hier einfügen)"
+        type: string
+        required: true
+      - name: name
+        label: Eigener Name (optional – sonst wird der Shop-Name genommen)
+        type: string
+      - name: title
+        label: Name aus dem Shop (wird automatisch gesetzt – leer lassen)
+        type: string
+      - name: image
+        label: Bild (wird automatisch gesetzt – leer lassen)
+        type: string
+      - name: price
+        label: Preis (wird automatisch gesetzt – leer lassen)
+        type: string
+
   - name: site
     label: "✏️ Texte, Bilder & Band"
     type: file
@@ -171,6 +195,7 @@ content:
               - { name: eyebrow, label: Kleine Zeile, type: string }
               - { name: title, label: Überschrift, type: string }
               - { name: text, label: Text, type: string }
+              - { name: favTitle, label: Überschrift über den Favoriten, type: string }
           - name: contact
             label: Bereich „Booking & Kontakt“
             type: object

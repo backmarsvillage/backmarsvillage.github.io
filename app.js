@@ -68,6 +68,7 @@
     if (!shop || shop.enabled === false) return;
     const name = String(shop.name || "").trim().replace(/^https?:\/\//, "").replace(/\.myspreadshop\..*$/, "");
     if (!name) return;
+    SHOP_ON = true;
     $("#merch").hidden = false;
     $("#navMerch").hidden = false;
     window.spread_shop_config = {
@@ -81,6 +82,30 @@
     sc.src = `https://${name}.myspreadshop.net/js/shopclient.nocache.js`;
     sc.onerror = () => { $("#shop").innerHTML = `<p class="shop__loading">Shop gerade nicht erreichbar – <a href="https://${name}.myspreadshop.de" target="_blank" rel="noopener">hier direkt zum Shop</a>.</p>`; };
     document.body.appendChild(sc);
+  }
+
+
+  /* ---------- Merch-Favoriten (content/favorites.json, im CMS unter „Merch-Favoriten“) ---------- */
+  let SHOP_ON = false;
+  function renderFavorites(list) {
+    list = (list || []).filter(f => f && f.link);
+    if (!list.length || !SHOP_ON) return;
+    $("#favGrid").innerHTML = list.map(f => {
+      let href = f.link, inShop = false;
+      try { // Produkt im eingebetteten Shop auf dieser Seite öffnen statt auf die Spreadshop-Seite zu wechseln
+        const u = new URL(f.link);
+        if (/myspreadshop\./.test(u.hostname)) { href = `#!${u.pathname}${u.search}`; inShop = true; }
+      } catch {}
+      const name = f.name || String(f.title || "Zum Produkt").replace(/^Backmars Village\s*[–-]\s*/i, "");
+      return `<a class="fav" href="${esc(href)}"${inShop ? " data-shop" : ' target="_blank" rel="noopener"'}>
+        <span class="fav__img">${f.image ? `<img src="${esc(f.image)}" alt="${esc(name)}" loading="lazy">` : ""}</span>
+        <span class="fav__name">${esc(name)}</span>${f.price ? `<span class="fav__price">${esc(f.price)}</span>` : ""}</a>`;
+    }).join("");
+    $("#favs").hidden = false;
+    $("#favGrid").addEventListener("click", e => {
+      const a = e.target.closest("a[data-shop]");
+      if (a) setTimeout(() => $("#shop").scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+    });
   }
 
   /* ---------- Rendering ---------- */
@@ -276,8 +301,8 @@
   }
 
   ui();
-  Promise.all([load("site"), load("videos"), load("releases"), load("gigs")]).then(([s, v, r, g]) => {
+  Promise.all([load("site"), load("videos"), load("releases"), load("gigs"), load("favorites")]).then(([s, v, r, g, f]) => {
     if (r) r.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-    renderSite(s); renderVideos(v); renderSlider(r, s && s.texts); renderReleases(r); renderGigs(g); reveal();
+    renderSite(s); renderVideos(v); renderSlider(r, s && s.texts); renderReleases(r); renderGigs(g); renderFavorites(f); reveal();
   });
 })();
