@@ -1,0 +1,40 @@
+name: Merch-Favoriten aktualisieren
+
+on:
+  push:
+    paths:
+      - content/favorites.json # sobald im CMS ein Favorit eingetragen/geändert wird
+  schedule:
+    - cron: "41 4 * * *" # täglich: Preise & Bilder aktuell halten (UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: favorites
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Bild, Name & Preis aus dem Shop holen
+        run: node scripts/update-favorites.mjs
+      - name: Änderungen speichern & Website neu bauen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then echo "Keine Änderungen."; exit 0; fi
+          git config user.name "Merch-Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/favorites.json
+          git commit -m "Merch-Favoriten: Bild, Name & Preis aktualisiert"
+          git pull --rebase
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
