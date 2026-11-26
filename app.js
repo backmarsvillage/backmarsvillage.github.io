@@ -87,6 +87,8 @@
 
   /* ---------- Merch-Favoriten (content/favorites.json, im CMS unter „Merch-Favoriten“) ---------- */
   let SHOP_ON = false;
+  // Spreadshirt-Bild: ganze Ware statt nur Motiv-Ausschnitt zeigen
+  const favImg = u => { u = String(u || ""); if (!/\/compositions\//.test(u)) return u; const ap = (u.match(/DPT\d+A(\d+)/) || [])[1]; return u.replace("/compositions/", "/products/").replace(/\.jpg(\?.*)?$/, ".png?width=700&height=700") + (ap ? "&appearanceId=" + ap : ""); };
   function renderFavorites(list) {
     list = (list || []).filter(f => f && f.link);
     if (!list.length || !SHOP_ON) return;
@@ -98,7 +100,7 @@
       } catch {}
       const name = f.name || String(f.title || "Zum Produkt").replace(/^Backmars Village\s*[–-]\s*/i, "");
       return `<a class="fav" href="${esc(href)}"${inShop ? " data-shop" : ' target="_blank" rel="noopener"'}>
-        <span class="fav__img">${f.image ? `<img src="${esc(f.image)}" alt="${esc(name)}" loading="lazy">` : ""}</span>
+        <span class="fav__img">${f.image ? `<img src="${esc(favImg(f.image))}" alt="${esc(name)}" loading="lazy">` : ""}</span>
         <span class="fav__name">${esc(name)}</span>${f.price ? `<span class="fav__price">${esc(f.price)}</span>` : ""}</a>`;
     }).join("");
     $("#favs").hidden = false;
